@@ -4,9 +4,6 @@
   const { applyDecorators } = require('discourse/widgets/widget');
   const { ajax } = require('discourse/lib/ajax');
 
-  SiteSetting.content_security_policy = false;
-  SiteSetting.force_https = false; 
-
   ajax({
     type: 'GET',
     contentType: "application/json",
