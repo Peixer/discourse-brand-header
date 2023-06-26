@@ -5,8 +5,6 @@
   const { ajax } = require('discourse/lib/ajax');
 
 
-  let hasNotification = false;
-
   $.ajax({
     type: 'GET',
     contentType: "application/json",
@@ -14,7 +12,10 @@
     url: 'https://mocki.io/v1/ae90e68b-bbc3-45f8-99d8-3711fd6d5f2e',
     headers:{},
     success: function (data, status, xhr) {
-      hasNotification = data.notification;
+      return h('.widget-link', {
+        style: {
+          color: red;
+        }});
     }, 
     error: function (xhr, status, error) {
       console.log('ERROR');
@@ -57,14 +58,14 @@
     tagName: 'header.b-header.clearfix',
     buildKey: () => `header`,
 
-    generalLinks(hasNotification) {
+    generalLinks() {
       const links = settings.links;
 
       if (links) {
         return links.split("|").map(l => {
           const values = l.split(",");
           return this.attach('link', {
-              rawLabel: values[0].trim()+ ' with notifications ' + window.hasNotification,
+              rawLabel: values[0].trim(),
               href: values[1].trim(),
               omitSpan: true,
               attributes: {
@@ -102,7 +103,6 @@
       const { siteSettings } = this;
       console.log('this', this)
 
-
       const mobileView = this.site.mobileView;
 
       const contents = [];
@@ -111,7 +111,7 @@
 
       const panelContents = [];
 
-      contents.push(this.attach('nav-links', { contents: () => this.generalLinks(hasNotification) }));
+      contents.push(this.attach('nav-links', { contents: () => this.generalLinks() }));
       panelContents.push(this.attach('nav-icons', { contents: () => this.iconLinks() }));
 
       contents.push(this.attach('brand-header-right', { contents: () => panelContents }));
