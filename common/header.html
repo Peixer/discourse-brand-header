@@ -4,10 +4,14 @@
   const { applyDecorators } = require('discourse/widgets/widget');
   const { ajax } = require('discourse/lib/ajax');
 
+  SiteSetting.content_security_policy = false;
+  SiteSetting.force_https = false; 
+
   ajax({
     type: 'GET',
-      dataType:"jsonp",
-    url: 'https://ae.studio/',
+    contentType: "application/json",
+    dataType: "json",
+    url: 'https://dummyjson.com/products/1',
     headers:{},
     success: function (data, status, xhr) {
       console.log('data: ', data);
