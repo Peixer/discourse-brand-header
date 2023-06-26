@@ -39,7 +39,7 @@
     tagName: 'header.b-header.clearfix',
     buildKey: () => `header`,
 
-    generalLinks() {
+    generalLinks(hasNotification) {
       const links = settings.links;
 
       if (links) {
@@ -106,7 +106,7 @@
 
       const panelContents = [];
 
-      contents.push(this.attach('nav-links', { contents: () => this.generalLinks() }));
+      contents.push(this.attach('nav-links', { contents: () => this.generalLinks(hasNotification) }));
       panelContents.push(this.attach('nav-icons', { contents: () => this.iconLinks() }));
 
       contents.push(this.attach('brand-header-right', { contents: () => panelContents }));
