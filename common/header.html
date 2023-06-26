@@ -5,6 +5,22 @@
   const { ajax } = require('discourse/lib/ajax');
 
 
+  let hasNotification = false;
+
+  $.ajax({
+    type: 'GET',
+    contentType: "application/json",
+    dataType: "json",
+    url: 'https://mocki.io/v1/ae90e68b-bbc3-45f8-99d8-3711fd6d5f2e',
+    headers:{},
+    success: function (data, status, xhr) {
+      hasNotification = data.notification;
+    }, 
+    error: function (xhr, status, error) {
+      console.log('ERROR');
+    }
+  });
+
   const flatten = array => [].concat.apply([], array);
 
   api.createWidget('nav-links', {
@@ -46,7 +62,7 @@
         return links.split("|").map(l => {
           const values = l.split(",");
           return this.attach('link', {
-              rawLabel: values[0].trim()+ ' with notifications ' + hasNotification,
+              rawLabel: values[0].trim()+ ' with notifications ' + window.hasNotification,
               href: values[1].trim(),
               omitSpan: true,
               attributes: {
@@ -80,22 +96,6 @@
     },
 
     html(attrs, state) {
-
-      let hasNotification = false;
-
-      $.ajax({
-        type: 'GET',
-        contentType: "application/json",
-        dataType: "json",
-        url: 'https://mocki.io/v1/ae90e68b-bbc3-45f8-99d8-3711fd6d5f2e',
-        headers:{},
-        success: function (data, status, xhr) {
-          hasNotification = data.notification;
-        }, 
-        error: function (xhr, status, error) {
-          console.log('ERROR');
-        }
-      });
 
       const { siteSettings } = this;
       const mobileView = this.site.mobileView;
@@ -163,6 +163,7 @@
     headers:{},
     success: function (data, status, xhr) {
      console.log(data);
+     window.hasNotification = data.notification;
     }, 
     error: function (xhr, status, error) {
       console.log('ERROR');
