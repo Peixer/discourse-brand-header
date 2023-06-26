@@ -4,25 +4,6 @@
   const { applyDecorators } = require('discourse/widgets/widget');
   const { ajax } = require('discourse/lib/ajax');
 
-  let hasNotification = false;
-  // authentication - user variables
-    // token Auth0 
-
-
-    $.ajax({
-      type: 'GET',
-      contentType: "application/json",
-      dataType: "json",
-      url: 'https://mocki.io/v1/ae90e68b-bbc3-45f8-99d8-3711fd6d5f2e',
-      headers:{},
-      success: function (data, status, xhr) {
-        this.hasNotification = data.notification;
-      }, 
-      error: function (xhr, status, error) {
-        console.log('ERROR');
-      }
-    });
-  
 
   const flatten = array => [].concat.apply([], array);
 
@@ -99,6 +80,23 @@
     },
 
     html(attrs, state) {
+
+      let hasNotification = false;
+
+      $.ajax({
+        type: 'GET',
+        contentType: "application/json",
+        dataType: "json",
+        url: 'https://mocki.io/v1/ae90e68b-bbc3-45f8-99d8-3711fd6d5f2e',
+        headers:{},
+        success: function (data, status, xhr) {
+          hasNotification = data.notification;
+        }, 
+        error: function (xhr, status, error) {
+          console.log('ERROR');
+        }
+      });
+
       const { siteSettings } = this;
       const mobileView = this.site.mobileView;
 
