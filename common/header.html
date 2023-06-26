@@ -4,9 +4,25 @@
   const { applyDecorators } = require('discourse/widgets/widget');
   const { ajax } = require('discourse/lib/ajax');
 
+  let hasNotification = false;
   // authentication - user variables
     // token Auth0 
 
+
+    $.ajax({
+      type: 'GET',
+      contentType: "application/json",
+      dataType: "json",
+      url: 'https://mocki.io/v1/ae90e68b-bbc3-45f8-99d8-3711fd6d5f2e',
+      headers:{},
+      success: function (data, status, xhr) {
+        this.hasNotification = data.notification;
+      }, 
+      error: function (xhr, status, error) {
+        console.log('ERROR');
+      }
+    });
+  
 
   const flatten = array => [].concat.apply([], array);
 
@@ -49,7 +65,7 @@
         return links.split("|").map(l => {
           const values = l.split(",");
           return this.attach('link', {
-              rawLabel: values[0].trim(),
+              rawLabel: values[0].trim()+ 'with notifications ' + this.hasNotification,
               href: values[1].trim(),
               omitSpan: true,
               attributes: {
@@ -148,7 +164,7 @@
     url: 'https://dummyjson.com/products/3',
     headers:{},
     success: function (data, status, xhr) {
-     return alert('testaaa')
+     console.log(data);
     }, 
     error: function (xhr, status, error) {
       console.log('ERROR');
