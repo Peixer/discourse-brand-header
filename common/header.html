@@ -4,19 +4,31 @@
   const { applyDecorators } = require('discourse/widgets/widget');
   const { ajax } = require('discourse/lib/ajax');
 
-  ajax({
-    type: 'GET',
-    contentType: "application/json",
-    dataType: "json",
-    url: 'https://dummyjson.com/products/1',
-    headers:{},
-    success: function (data, status, xhr) {
-      alert('WORKS');
-    }, 
-    error: function (xhr, status, error) {
-      alert('ERROR');
-    }
+  // authentication - user variables
+    // token Auth0 
+
+
+  
+  api.onPageChange(() => {
+    doStuff();
   });
+
+  function doStuff() {
+    ajax({
+      type: 'GET',
+      contentType: "application/json",
+      dataType: "json",
+      url: 'https://dummyjson.com/products/1',
+      headers:{},
+      success: function (data, status, xhr) {
+        alert('WORKS');
+      }, 
+      error: function (xhr, status, error) {
+        alert('ERROR');
+      }
+    });
+  }
+
 
   const flatten = array => [].concat.apply([], array);
 
