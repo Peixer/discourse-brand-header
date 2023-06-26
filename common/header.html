@@ -2,7 +2,7 @@
 
   const { h } = require('virtual-dom');
   const { applyDecorators } = require('discourse/widgets/widget');
-  import { ajax } from 'discourse/lib/ajax';
+  const { ajax } = require('discourse/lib/ajax');
 
   ajax({
     type: 'GET',
