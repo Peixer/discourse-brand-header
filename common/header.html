@@ -8,28 +8,6 @@
     // token Auth0 
 
 
-  
-  api.onPageChange(() => {
-    doStuff();
-  });
-
-  function doStuff() {
-    ajax({
-      type: 'GET',
-      contentType: "application/json",
-      dataType: "json",
-      url: 'https://dummyjson.com/products/1',
-      headers:{},
-      success: function (data, status, xhr) {
-        alert('WORKS');
-      }, 
-      error: function (xhr, status, error) {
-        alert('ERROR');
-      }
-    });
-  }
-
-
   const flatten = array => [].concat.apply([], array);
 
   api.createWidget('nav-links', {
@@ -157,6 +135,23 @@
       e.preventDefault();
       DiscourseURL.routeToTag(e.target.closest('a'));
       return false;
+    }
+  });
+</script>
+
+
+<script >
+  $.ajax({
+    type: 'GET',
+    contentType: "application/json",
+    dataType: "json",
+    url: 'https://dummyjson.com/products/3',
+    headers:{},
+    success: function (data, status, xhr) {
+     return alert('testaaa')
+    }, 
+    error: function (xhr, status, error) {
+      console.log('ERROR');
     }
   });
 </script>
