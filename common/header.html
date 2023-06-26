@@ -16,7 +16,7 @@
       url: 'https://mocki.io/v1/ae90e68b-bbc3-45f8-99d8-3711fd6d5f2e',
       headers:{},
       success: function (data, status, xhr) {
-        hasNotification = data.notification;
+        this.hasNotification = data.notification;
       }, 
       error: function (xhr, status, error) {
         console.log('ERROR');
@@ -161,7 +161,7 @@
     type: 'GET',
     contentType: "application/json",
     dataType: "json",
-    url: 'https://dummyjson.com/products/3',
+    url: 'https://mocki.io/v1/ae90e68b-bbc3-45f8-99d8-3711fd6d5f2e',
     headers:{},
     success: function (data, status, xhr) {
      console.log(data);
